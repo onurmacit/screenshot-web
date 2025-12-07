@@ -6,6 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { MobileNav } from "@/components/mobile-nav";
+import { DemoSection } from "@/components/demo-section";
+import { StatsSection } from "@/components/stats-section";
+import { UseCasesSection } from "@/components/use-cases-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
+import { FAQSection } from "@/components/faq-section";
+import { ArrowRight, Zap, CheckCircle2 } from "lucide-react";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -134,11 +141,23 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between relative">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Screenshot API
           </div>
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="#features"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#use-cases"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Use Cases
+            </a>
             <a
               href="#pricing"
               className="text-gray-600 hover:text-gray-900 transition-colors"
@@ -146,10 +165,10 @@ export default function Home() {
               Pricing
             </a>
             <a
-              href="#features"
+              href="#faq"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Features
+              FAQ
             </a>
             <Button variant="outline" asChild>
               <a href="/docs">Documentation</a>
@@ -158,52 +177,84 @@ export default function Home() {
               <a href="#waitlist">Get Started</a>
             </Button>
           </div>
+          <div className="md:hidden">
+            <MobileNav />
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
-        <Badge className="mb-4" variant="secondary">
+        <Badge className="mb-4 animate-fade-in" variant="secondary">
           🚀 Coming Soon
         </Badge>
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-fade-in">
           Professional Screenshot & PDF API
         </h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
           Transform any URL into high-quality screenshots or PDFs. Fast, reliable,
-          and built for developers.
+          and built for developers who demand excellence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" asChild>
-            <a href="#waitlist">Join Waitlist</a>
+          <Button size="lg" asChild className="group">
+            <a href="#waitlist">
+              Join Waitlist
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#pricing">View Pricing</a>
+            <a href="#demo">Try Demo</a>
           </Button>
         </div>
 
+        {/* Key Benefits */}
+        <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm md:text-base">
+          <div className="flex items-center gap-2 text-gray-700">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+            <span>No credit card required</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700">
+            <Zap className="h-5 w-5 text-yellow-500" />
+            <span>2-3 second response time</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+            <span>99.9% uptime SLA</span>
+          </div>
+        </div>
+
         {/* Code Example */}
-        <div className="max-w-2xl mx-auto mt-12">
-          <Card className="bg-gray-900 text-gray-100 border-gray-800">
+        <div className="max-w-3xl mx-auto mt-12 animate-fade-in">
+          <Card className="bg-gray-900 text-gray-100 border-gray-800 shadow-2xl">
             <CardHeader>
-              <CardTitle className="text-left text-sm font-mono">
+              <CardTitle className="text-left text-sm font-mono flex items-center gap-2">
+                <span className="text-green-400">$</span>
                 Simple API Call
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <pre className="text-left text-sm overflow-x-auto">
-                <code>{`curl -X POST https://api.screenshot.example.com/v1/render/screenshot \\
+              <pre className="text-left text-sm overflow-x-auto font-mono">
+                <code className="text-gray-300">{`curl -X POST https://api.screenshot.example.com/v1/render/screenshot \\
   -H "X-API-Key: sk_live_your_key" \\
   -H "Content-Type: application/json" \\
   -d '{
     "url": "https://example.com",
     "width": 1920,
-    "height": 1080
+    "height": 1080,
+    "format": "png"
   }'`}</code>
               </pre>
             </CardContent>
           </Card>
         </div>
+      </section>
+
+      {/* Stats Section */}
+      <StatsSection />
+
+      {/* Demo Section */}
+      <section id="demo">
+        <DemoSection />
       </section>
 
       {/* Features Section */}
@@ -216,17 +267,27 @@ export default function Home() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
+            <Card 
+              key={index} 
+              className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-2 hover:border-blue-200"
+            >
               <CardHeader>
                 <div className="text-4xl mb-2">{feature.icon}</div>
-                <CardTitle>{feature.title}</CardTitle>
+                <CardTitle className="text-xl">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {feature.description}
+                </CardDescription>
               </CardContent>
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Use Cases Section */}
+      <section id="use-cases">
+        <UseCasesSection />
       </section>
 
       {/* Pricing Section */}
@@ -281,6 +342,14 @@ export default function Home() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* FAQ Section */}
+      <section id="faq">
+        <FAQSection />
       </section>
 
       {/* Waitlist Section */}
